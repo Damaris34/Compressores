@@ -3,18 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Operação</title>
+    <title>Monitoramento de Sistema</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div id="date-time"></div>
-        <div id="responsible">Responsável: João Silva</div>
-        <div id="temperature"></div>
-        <div id="pressure"></div>
-        <div id="operation-status">Status: Em Operação</div>
-        <button id="download-excel">Baixar Relatório em Excel</button>
+        <h1>Monitoramento de Sistema</h1>
+        <div id="datetime"></div>
+        <div class="info-item">
+            <label for="pressure">Pressão:</label>
+            <span id="pressure">0 PSI</span>
+        </div>
+        <div class="info-item">
+            <label for="temperature">Temperatura:</label>
+            <span id="temperature">0 °C</span>
+        </div>
+        <div class="info-item">
+            <label for="compressor">Compressor em Operação:</label>
+            <span id="compressor">Não</span>
+        </div>
+        <div class="info-item">
+            <label for="responsible">Responsável pela Verificação:</label>
+            <span id="responsible">Não informado</span>
+        </div>
+        <button id="generateWord">Gerar Relatório em Word</button>
+        <button id="generateExcel">Gerar Relatório em Excel</button>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/6.0.0/docx.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="script.js"></script>
 </body>
