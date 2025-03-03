@@ -12,17 +12,45 @@ body {
     text-align: center;
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#date-time, #responsible, #temperature, #pressure, #operation-status {
+h1 {
+    color: #333;
+}
+
+#datetime {
     font-size: 1.5em;
-    margin: 10px 0;
+    color: #555;
+    margin-top: 20px;
+}
+
+.info-item {
+    margin-top: 10px;
+}
+
+.info-item label {
+    font-weight: bold;
+    color: #333;
+}
+
+.info-item span {
+    font-size: 1.2em;
+    color: #555;
 }
 
 button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 1em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
