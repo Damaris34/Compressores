@@ -1,0 +1,34 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const reportForm = document.getElementById('report-form');
+
+    reportForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        generateReport();
+    });
+
+    function generateReport() {
+        const date = document.getElementById('date').value;
+        const pressure = document.getElementById('pressure').value;
+        const temperature = document.getElementById('temperature').value;
+        const operation = document.getElementById('operation').value;
+        const responsible = document.getElementById('responsible').value;
+
+        const reportContent = `
+            <h1>Relatório de Compressor</h1>
+            <p><strong>Data/Horário:</strong> ${date}</p>
+            <p><strong>Pressão:</strong> ${pressure} bar</p>
+            <p><strong>Temperatura:</strong> ${temperature} °C</p>
+            <p><strong>Compressor em operação:</strong> ${operation}</p>
+            <p><strong>Responsável pela análise de temperatura:</strong> ${responsible}</p>
+        `;
+
+        const blob = new Blob([reportContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'relatorio_compressor.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+});
