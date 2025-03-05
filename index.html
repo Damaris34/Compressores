@@ -1,93 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Compressor</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Relatório de Compressor</h1>
-        <div class="data-hora" id="data-hora"></div>
-        <div class="info">
-            <section>
-                <h2>Compressores</h2>
-                <div class="compressor-group">
-                    <!-- Repetir para Compressor 1 a 5 -->
-                    <div class="compressor">
-                        <h3>Compressor 1</h3>
-                        <p>Pressão: <input type="text" id="pressao-c1"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-c1"></p>
-                    </div>
-                    <div class="compressor">
-                        <h3>Compressor 2</h3>
-                        <p>Pressão: <input type="text" id="pressao-c2"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-c2"></p>
-                    </div>
-                    <div class="compressor">
-                        <h3>Compressor 3</h3>
-                        <p>Pressão: <input type="text" id="pressao-c3"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-c3"></p>
-                    </div>
-                    <div class="compressor">
-                        <h3>Compressor 4</h3>
-                        <p>Pressão: <input type="text" id="pressao-c4"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-c4"></p>
-                    </div>
-                    <div class="compressor">
-                        <h3>Compressor 5</h3>
-                        <p>Pressão: <input type="text" id="pressao-c5"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-c5"></p>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h2>Secadores</h2>
-                <div class="secador-group">
-                    <div class="secador">
-                        <h3>Secador 1</h3>
-                        <p>Pressão: <input type="text" id="pressao-s1"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-s1"></p>
-                    </div>
-                    <div class="secador">
-                        <h3>Secador 2</h3>
-                        <p>Pressão: <input type="text" id="pressao-s2"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-s2"></p>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h2>Pulmões</h2>
-                <div class="pulmao-group">
-                    <div class="pulmao">
-                        <h3>Pulmão 1</h3>
-                        <p>Pressão: <input type="text" id="pressao-p1"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-p1"></p>
-                    </div>
-                    <div class="pulmao">
-                        <h3>Pulmão 2</h3>
-                        <p>Pressão: <input type="text" id="pressao-p2"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-p2"></p>
-                    </div>
-                    <div class="pulmao">
-                        <h3>Pulmão 3</h3>
-                        <p>Pressão: <input type="text" id="pressao-p3"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-p3"></p>
-                    </div>
-                    <div class="pulmao">
-                        <h3>Pulmão 4</h3>
-                        <p>Pressão: <input type="text" id="pressao-p4"></p>
-                        <p>Temperatura: <input type="text" id="temperatura-p4"></p>
-                    </div>
-                </div>
-            </section>
-            <p>Responsável: <input type="text" id="responsavel"></p>
-        </div>
-        <input type="file" id="foto-input" accept="image/*">
-        <button onclick="gerarRelatorio()">Gerar Relatório PDF</button>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+document.addEventListener('DOMContentLoaded', () => {
+    const reportForm = document.getElementById('report-form');
+
+    reportForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        generateReport();
+    });
+
+    function generateReport() {
+        const date = document.getElementById('date').value;
+        const pressure = document.getElementById('pressure').value;
+        const temperature = document.getElementById('temperature').value;
+        const operation = document.getElementById('operation').value;
+        const responsible = document.getElementById('responsible').value;
+
+        const reportContent = `
+            <h1>Relatório de Compressor</h1>
+            <p><strong>Data/Horário:</strong> ${date}</p>
+            <p><strong>Pressão:</strong> ${pressure} bar</p>
+            <p><strong>Temperatura:</strong> ${temperature} °C</p>
+            <p><strong>Compressor em operação:</strong> ${operation}</p>
+            <p><strong>Responsável pela análise de temperatura:</strong> ${responsible}</p>
+        `;
+
+        const blob = new Blob([reportContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'relatorio_compressor.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+});
