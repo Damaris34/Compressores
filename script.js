@@ -77,7 +77,7 @@ document.getElementById('generate-pdf').addEventListener('click', function() {
     });
 
     reportContent += `</ul>
-        <h2>Pulmões</h2>
+        <h2>Pulmões (Vasos de Pressão)</h2>
         <ul>`;
 
     lungs.forEach((lung, index) => {
