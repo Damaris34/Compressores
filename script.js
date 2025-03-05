@@ -13,21 +13,35 @@ document.getElementById('generate-pdf').addEventListener('click', function() {
     doc.text(`Compressor em Funcionamento: ${document.getElementById('compressor').value}`, 14, 62);
 
     doc.text('Compressores:', 14, 72);
-    const compressors = document.getElementById('compressor-list').innerText.split('\n');
+    const compressors = [
+        { name: 'Atlas 1', pressure: document.getElementById('atlas1-pressure').value, temperature: document.getElementById('atlas1-temperature').value },
+        { name: 'Atlas 2', pressure: document.getElementById('atlas2-pressure').value, temperature: document.getElementById('atlas2-temperature').value },
+        { name: 'Schuz 1', pressure: document.getElementById('schuz1-pressure').value, temperature: document.getElementById('schuz1-temperature').value },
+        { name: 'Schuz 2', pressure: document.getElementById('schuz2-pressure').value, temperature: document.getElementById('schuz2-temperature').value },
+        { name: 'Interface', pressure: document.getElementById('interface-pressure').value, temperature: document.getElementById('interface-temperature').value }
+    ];
     compressors.forEach((compressor, index) => {
-        doc.text(compressor, 14, 82 + (index * 10));
+        doc.text(`${compressor.name} - Pressão: ${compressor.pressure}, Temperatura: ${compressor.temperature}`, 14, 82 + (index * 10));
     });
 
     doc.text('Secadores:', 14, 132);
-    const dryers = document.getElementById('dryer-list').innerText.split('\n');
+    const dryers = [
+        { name: 'SCM', pressure: document.getElementById('scm-pressure').value, temperature: document.getElementById('scm-temperature').value },
+        { name: 'Schuz', pressure: document.getElementById('schuz-pressure').value, temperature: document.getElementById('schuz-temperature').value }
+    ];
     dryers.forEach((dryer, index) => {
-        doc.text(dryer, 14, 142 + (index * 10));
+        doc.text(`${dryer.name} - Pressão: ${dryer.pressure}, Temperatura: ${dryer.temperature}`, 14, 142 + (index * 10));
     });
 
     doc.text('Pulmões (Vasos de Pressão):', 14, 172);
-    const lungs = document.getElementById('lung-list').innerText.split('\n');
+    const lungs = [
+        { name: 'Pulmão 1', pressure: document.getElementById('lung1-pressure').value, temperature: document.getElementById('lung1-temperature').value },
+        { name: 'Pulmão 2', pressure: document.getElementById('lung2-pressure').value, temperature: document.getElementById('lung2-temperature').value },
+        { name: 'Pulmão 3', pressure: document.getElementById('lung3-pressure').value, temperature: document.getElementById('lung3-temperature').value },
+        { name: 'Pulmão 4', pressure: document.getElementById('lung4-pressure').value, temperature: document.getElementById('lung4-temperature').value }
+    ];
     lungs.forEach((lung, index) => {
-        doc.text(lung, 14, 182 + (index * 10));
+        doc.text(`${lung.name} - Pressão: ${lung.pressure}, Temperatura: ${lung.temperature}`, 14, 182 + (index * 10));
     });
 
     doc.text(`Responsável pela Verificação: ${document.getElementById('responsible').value}`, 14, 232);
