@@ -9,13 +9,25 @@
 </head>
 <body>
     <div class="container">
-        <h1>Relatório de Compressores</h1>
-        <div class="info">
-            <p><strong>Data/Horário:</strong> <span id="data-hora">01/10/2023 14:30</span></p>
-            <p><strong>Pressão/Temperatura:</strong> <span id="pressao-temp">100 kPa / 25°C</span></p>
-            <p><strong>Compressor em Funcionamento:</strong> <span id="compressor-status">Sim</span></p>
-        </div>
-        <div class="compressores">
+        <header>
+            <h1>Relatório de Compressores</h1>
+            <p class="subtitle">Detalhes Operacionais e Estatus dos Equipamentos</p>
+        </header>
+        <section class="info">
+            <div class="info-item">
+                <strong>Data/Horário:</strong>
+                <span id="data-hora">01/10/2023 14:30</span>
+            </div>
+            <div class="info-item">
+                <strong>Pressão/Temperatura:</strong>
+                <span id="pressao-temp">100 kPa / 25°C</span>
+            </div>
+            <div class="info-item">
+                <strong>Compressor em Funcionamento:</strong>
+                <span id="compressor-status">Sim</span>
+            </div>
+        </section>
+        <section class="equipamentos">
             <h2>Compressores</h2>
             <ul>
                 <li>1 Altas</li>
@@ -24,27 +36,29 @@
                 <li>1 Schuz</li>
                 <li>1 Interface</li>
             </ul>
-        </div>
-        <div class="secadores">
+        </section>
+        <section class="equipamentos">
             <h2>Secadores</h2>
             <ul>
                 <li>1 SCM</li>
                 <li>1 Schuz</li>
             </ul>
-        </div>
-        <div class="pulmoes">
+        </section>
+        <section class="equipamentos">
             <h2>Pulmões</h2>
             <p>Quantidade: 4</p>
-        </div>
-        <div class="responsavel">
+        </section>
+        <section class="responsavel">
             <h2>Responsável</h2>
             <p>Nome do Responsável</p>
-        </div>
-        <div class="fotos">
+        </section>
+        <section class="fotos">
             <h2>Fotos</h2>
-            <img src="foto1.jpg" alt="Foto 1">
-            <img src="foto2.jpg" alt="Foto 2">
-        </div>
+            <div class="foto-container">
+                <img src="foto1.jpg" alt="Foto 1">
+                <img src="foto2.jpg" alt="Foto 2">
+            </div>
+        </section>
         <button id="gerar-pdf">Gerar PDF</button>
     </div>
     <script src="script.js"></script>
