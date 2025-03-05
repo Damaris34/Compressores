@@ -5,138 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Compressores</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Relatório de Compressores</h1>
-        <div class="report-section">
-            <h2>Data/Horário</h2>
-            <input type="datetime-local" id="datetime">
+        <div class="info">
+            <p><strong>Data/Horário:</strong> <span id="data-hora">01/10/2023 14:30</span></p>
+            <p><strong>Pressão/Temperatura:</strong> <span id="pressao-temp">100 kPa / 25°C</span></p>
+            <p><strong>Compressor em Funcionamento:</strong> <span id="compressor-status">Sim</span></p>
         </div>
-        <div class="report-section">
+        <div class="compressores">
             <h2>Compressores</h2>
-            <ul id="compressor-list">
-                <li>
-                    Atlas 1
-                    <div class="compressor-details">
-                        <label for="atlas1-pressure">Pressão:</label>
-                        <input type="text" id="atlas1-pressure">
-                        <label for="atlas1-temperature">Temperatura:</label>
-                        <input type="text" id="atlas1-temperature">
-                    </div>
-                </li>
-                <li>
-                    Atlas 2
-                    <div class="compressor-details">
-                        <label for="atlas2-pressure">Pressão:</label>
-                        <input type="text" id="atlas2-pressure">
-                        <label for="atlas2-temperature">Temperatura:</label>
-                        <input type="text" id="atlas2-temperature">
-                    </div>
-                </li>
-                <li>
-                    Schuz 1
-                    <div class="compressor-details">
-                        <label for="schuz1-pressure">Pressão:</label>
-                        <input type="text" id="schuz1-pressure">
-                        <label for="schuz1-temperature">Temperatura:</label>
-                        <input type="text" id="schuz1-temperature">
-                    </div>
-                </li>
-                <li>
-                    Schuz 2
-                    <div class="compressor-details">
-                        <label for="schuz2-pressure">Pressão:</label>
-                        <input type="text" id="schuz2-pressure">
-                        <label for="schuz2-temperature">Temperatura:</label>
-                        <input type="text" id="schuz2-temperature">
-                    </div>
-                </li>
-                <li>
-                    Interface
-                    <div class="compressor-details">
-                        <label for="interface-pressure">Pressão:</label>
-                        <input type="text" id="interface-pressure">
-                        <label for="interface-temperature">Temperatura:</label>
-                        <input type="text" id="interface-temperature">
-                    </div>
-                </li>
+            <ul>
+                <li>1 Altas</li>
+                <li>1 Atlas</li>
+                <li>1 Schuz</li>
+                <li>1 Schuz</li>
+                <li>1 Interface</li>
             </ul>
         </div>
-        <div class="report-section">
+        <div class="secadores">
             <h2>Secadores</h2>
-            <ul id="dryer-list">
-                <li>
-                    SCM
-                    <div class="dryer-details">
-                        <label for="scm-pressure">Pressão:</label>
-                        <input type="text" id="scm-pressure">
-                        <label for="scm-temperature">Temperatura:</label>
-                        <input type="text" id="scm-temperature">
-                    </div>
-                </li>
-                <li>
-                    Schuz
-                    <div class="dryer-details">
-                        <label for="schuz-pressure">Pressão:</label>
-                        <input type="text" id="schuz-pressure">
-                        <label for="schuz-temperature">Temperatura:</label>
-                        <input type="text" id="schuz-temperature">
-                    </div>
-                </li>
+            <ul>
+                <li>1 SCM</li>
+                <li>1 Schuz</li>
             </ul>
         </div>
-        <div class="report-section">
-            <h2>Pulmões (Vasos de Pressão)</h2>
-            <ul id="lung-list">
-                <li>
-                    Pulmão 1
-                    <div class="lung-details">
-                        <label for="lung1-pressure">Pressão:</label>
-                        <input type="text" id="lung1-pressure">
-                        <label for="lung1-temperature">Temperatura:</label>
-                        <input type="text" id="lung1-temperature">
-                    </div>
-                </li>
-                <li>
-                    Pulmão 2
-                    <div class="lung-details">
-                        <label for="lung2-pressure">Pressão:</label>
-                        <input type="text" id="lung2-pressure">
-                        <label for="lung2-temperature">Temperatura:</label>
-                        <input type="text" id="lung2-temperature">
-                    </div>
-                </li>
-                <li>
-                    Pulmão 3
-                    <div class="lung-details">
-                        <label for="lung3-pressure">Pressão:</label>
-                        <input type="text" id="lung3-pressure">
-                        <label for="lung3-temperature">Temperatura:</label>
-                        <input type="text" id="lung3-temperature">
-                    </div>
-                </li>
-                <li>
-                    Pulmão 4
-                    <div class="lung-details">
-                        <label for="lung4-pressure">Pressão:</label>
-                        <input type="text" id="lung4-pressure">
-                        <label for="lung4-temperature">Temperatura:</label>
-                        <input type="text" id="lung4-temperature">
-                    </div>
-                </li>
-            </ul>
+        <div class="pulmoes">
+            <h2>Pulmões</h2>
+            <p>Quantidade: 4</p>
         </div>
-        <div class="report-section">
-            <h2>Responsável pela Verificação</h2>
-            <input type="text" id="responsible">
+        <div class="responsavel">
+            <h2>Responsável</h2>
+            <p>Nome do Responsável</p>
         </div>
-        <div class="report-section">
-            <h2>Adicionar Fotos</h2>
-            <input type="file" id="photos" multiple>
+        <div class="fotos">
+            <h2>Fotos</h2>
+            <img src="foto1.jpg" alt="Foto 1">
+            <img src="foto2.jpg" alt="Foto 2">
         </div>
-        <button id="generate-pdf">Gerar PDF</button>
+        <button id="gerar-pdf">Gerar PDF</button>
     </div>
     <script src="script.js"></script>
 </body>
