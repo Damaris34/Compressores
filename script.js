@@ -14,28 +14,31 @@ async function gerarRelatorio() {
     doc.text(`Data/Hora: ${new Date().toLocaleString()}`, 10, 20);
 
     // Adicionar informações dos compressores
+    doc.text('Compressores:', 10, 30);
     for (let i = 1; i <= 5; i++) {
         const pressao = document.getElementById(`pressao-c${i}`).value;
         const temperatura = document.getElementById(`temperatura-c${i}`).value;
-        doc.text(`Compressor ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 30 + (i * 10));
+        doc.text(`Compressor ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 40 + (i * 10));
     }
 
     // Adicionar informações dos secadores
+    doc.text('Secadores:', 10, 100);
     for (let i = 1; i <= 2; i++) {
         const pressao = document.getElementById(`pressao-s${i}`).value;
         const temperatura = document.getElementById(`temperatura-s${i}`).value;
-        doc.text(`Secador ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 90 + (i * 10));
+        doc.text(`Secador ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 110 + (i * 10));
     }
 
     // Adicionar informações dos pulmões
+    doc.text('Pulmões:', 10, 140);
     for (let i = 1; i <= 4; i++) {
         const pressao = document.getElementById(`pressao-p${i}`).value;
         const temperatura = document.getElementById(`temperatura-p${i}`).value;
-        doc.text(`Pulmão ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 120 + (i * 10));
+        doc.text(`Pulmão ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 150 + (i * 10));
     }
 
     const responsavel = document.getElementById('responsavel').value;
-    doc.text(`Responsável: ${responsavel}`, 10, 170);
+    doc.text(`Responsável: ${responsavel}`, 10, 200);
 
     // Adicionar foto ao PDF
     const fotoInput = document.getElementById('foto-input');
@@ -44,7 +47,7 @@ async function gerarRelatorio() {
         const img = new Image();
         img.src = URL.createObjectURL(file);
         img.onload = function () {
-            doc.addImage(img, 'JPEG', 10, 180, 50, 50);
+            doc.addImage(img, 'JPEG', 10, 210, 50, 50);
             doc.save('relatorio_compressor.pdf');
         };
     } else {
