@@ -1,44 +1,49 @@
-function updateDateTime() {
-    const datetimeElement = document.getElementById('datetime');
-    const now = new Date();
-    const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
+document.getElementById('generate-pdf').addEventListener('click', function() {
+    const datetime = document.getElementById('datetime').value;
+    const compressors = Array.from(document.querySelectorAll('.compressor input')).map(c => c.checked ? 'Sim' : 'Não');
+    const dryers = Array.from(document.querySelectorAll('.dryer input')).map(d => d.checked ? 'Sim' : 'Não');
+    const lungs = Array.from(document.querySelectorAll('.lung input')).map(l => l.checked ? 'Sim' : 'Não');
+    const pressure = document.getElementById('pressure').value;
+    const temperature = document.getElementById('temperature').value;
+    const responsible = document.getElementById('responsible').value;
+
+    const reportContent = `
+        <h1>Relatório de Compressores</h1>
+        <p><strong>Data/Horário:</strong> ${datetime}</p>
+        <h2>Compressores</h2>
+        <ul>
+            <li>Compressor 1: ${compressors[0]}</li>
+            <li>Compressor 2: ${compressors[1]}</li>
+            <li>Compressor 3: ${compressors[2]}</li>
+            <li>Compressor 4: ${compressors[3]}</li>
+            <li>Compressor 5: ${compressors[4]}</li>
+        </ul>
+        <h2>Secadores</h2>
+        <ul>
+            <li>Secador 1: ${dryers[0]}</li>
+            <li>Secador 2: ${dryers[1]}</li>
+        </ul>
+        <h2>Pulmões</h2>
+        <ul>
+            <li>Pulmão 1: ${lungs[0]}</li>
+            <li>Pulmão 2: ${lungs[1]}</li>
+            <li>Pulmão 3: ${lungs[2]}</li>
+            <li>Pulmão 4: ${lungs[3]}</li>
+        </ul>
+        <h2>Pressão/Temperatura</h2>
+        <p><strong>Pressão:</strong> ${pressure} bar</p>
+        <p><strong>Temperatura:</strong> ${temperature} °C</p>
+        <h2>Responsável pela Verificação</h2>
+        <p>${responsible}</p>
+    `;
+
+    const opt = {
+        margin:       0,
+        filename:     'relatorio_compressores.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
-    const formattedDateTime = now.toLocaleDateString('pt-BR', options);
-    datetimeElement.textContent = formattedDateTime;
-}
 
-// Atualiza a data e hora a cada segundo
-setInterval(updateDateTime, 1000);
-
-// Atualiza a data e hora imediatamente ao carregar a página
-updateDateTime();
-
-// Simulação de dados dinâmicos (substitua por dados reais conforme necessário)
-function updateSystemInfo() {
-    document.getElementById('pressure').textContent = `${Math.floor(Math.random() * 100)} PSI`;
-    document.getElementById('temperature').textContent = `${Math.floor(Math.random() * 50)} °C`;
-    document.getElementById('compressor').textContent = Math.random() > 0.5 ? 'Sim' : 'Não';
-    document.getElementById('responsible').textContent = 'João Silva';
-}
-
-// Atualiza as informações do sistema a cada 5 segundos
-setInterval(updateSystemInfo, 5000);
-
-// Atualiza as informações do sistema imediatamente ao carregar a página
-updateSystemInfo();
-
-// Função para gerar relatório em Word
-document.getElementById('generateWord').addEventListener('click', () => {
-    const doc = new docx.Document();
-    const datetime = document.getElementById('datetime').textContent;
-    const pressure = document.getElementById('pressure').textContent;
-    const temperature = document.getElementById('temperature').textContent;
-  
+    html2pdf().from(reportContent).set(opt).save();
+});
