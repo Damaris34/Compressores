@@ -15,6 +15,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 80%;
 }
 
 .info p {
@@ -23,6 +24,7 @@ body {
 
 .section {
     margin-top: 20px;
+    text-align: left;
 }
 
 .section h2 {
@@ -31,21 +33,32 @@ body {
     display: inline-block;
 }
 
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
-.item img {
-    max-width: 50px;
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+input[type="text"], input[type="file"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.item input {
-    width: 60px;
-    margin-right: 5px;
 }
 
 button {
