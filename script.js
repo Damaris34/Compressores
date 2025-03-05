@@ -96,7 +96,7 @@ document.getElementById('generate-pdf').addEventListener('click', function() {
         <h2>Fotos</h2>`;
 
     photos.forEach(photo => {
-        reportContent += `<img src="${photo}" style="max-width: 100px; max-height: 100px; margin: 5px;">`;
+        reportContent += `<img src="${photo}" style="max-width: 300px; max-height: 300px; margin: 10px;">`;
     });
 
     const opt = {
