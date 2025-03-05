@@ -1,111 +1,56 @@
-document.getElementById('photo-upload').addEventListener('change', function(event) {
-    const preview = document.getElementById('photo-preview');
-    preview.innerHTML = '';
-    const files = event.target.files;
-
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            preview.appendChild(img);
-        };
-
-        reader.readAsDataURL(file);
-    }
-});
-
 document.getElementById('generate-pdf').addEventListener('click', function() {
-    const datetime = document.getElementById('datetime').value;
-    const responsible = document.getElementById('responsible').value;
-    const photos = Array.from(document.querySelectorAll('#photo-preview img')).map(img => img.src);
+    const { jsPDF } = window.jspdf;
 
-    const compressors = [];
-    for (let i = 1; i <= 5; i++) {
-        const status = document.getElementById(`compressor${i}`).checked ? 'Sim' : 'Não';
-        const pressure = document.getElementById(`compressor${i}-pressure`).value;
-        const temperature = document.getElementById(`compressor${i}-temperature`).value;
-        compressors.push({ status, pressure, temperature });
-    }
+    const doc = new jsPDF();
 
-    const dryers = [];
-    for (let i = 1; i <= 2; i++) {
-        const status = document.getElementById(`dryer${i}`).checked ? 'Sim' : 'Não';
-        const pressure = document.getElementById(`dryer${i}-pressure`).value;
-        const temperature = document.getElementById(`dryer${i}-temperature`).value;
-        dryers.push({ status, pressure, temperature });
-    }
+    doc.setFontSize(18);
+    doc.text('Relatório de Compressores', 14, 22);
 
-    const lungs = [];
-    for (let i = 1; i <= 4; i++) {
-        const status = document.getElementById(`lung${i}`).checked ? 'Sim' : 'Não';
-        const pressure = document.getElementById(`lung${i}-pressure`).value;
-        const temperature = document.getElementById(`lung${i}-temperature`).value;
-        lungs.push({ status, pressure, temperature });
-    }
+    doc.setFontSize(14);
+    doc.text(`Data/Horário: ${document.getElementById('datetime').value}`, 14, 32);
+    doc.text(`Pressão: ${document.getElementById('pressure').value}`, 14, 42);
+    doc.text(`Temperatura: ${document.getElementById('temperature').value}`, 14, 52);
+    doc.text(`Compressor em Funcionamento: ${document.getElementById('compressor').value}`, 14, 62);
 
-    let reportContent = `
-        <h1>Relatório de Compressores</h1>
-        <p><strong>Data/Horário:</strong> ${datetime}</p>
-        <h2>Compressores</h2>
-        <ul>`;
-
+    doc.text('Compressores:', 14, 72);
+    const compressors = document.getElementById('compressor-list').innerText.split('\n');
     compressors.forEach((compressor, index) => {
-        reportContent += `
-            <li>Compressor ${index + 1}: ${compressor.status}
-            <ul>
-                <li>Pressão: ${compressor.pressure} bar</li>
-                <li>Temperatura: ${compressor.temperature} °C</li>
-            </ul>
-            </li>`;
+        doc.text(compressor, 14, 82 + (index * 10));
     });
 
-    reportContent += `</ul>
-        <h2>Secadores</h2>
-        <ul>`;
-
+    doc.text('Secadores:', 14, 132);
+    const dryers = document.getElementById('dryer-list').innerText.split('\n');
     dryers.forEach((dryer, index) => {
-        reportContent += `
-            <li>Secador ${index + 1}: ${dryer.status}
-            <ul>
-                <li>Pressão: ${dryer.pressure} bar</li>
-                <li>Temperatura: ${dryer.temperature} °C</li>
-            </ul>
-            </li>`;
+        doc.text(dryer, 14, 142 + (index * 10));
     });
 
-    reportContent += `</ul>
-        <h2>Pulmões (Vasos de Pressão)</h2>
-        <ul>`;
-
+    doc.text('Pulmões (Vasos de Pressão):', 14, 172);
+    const lungs = document.getElementById('lung-list').innerText.split('\n');
     lungs.forEach((lung, index) => {
-        reportContent += `
-            <li>Pulmão ${index + 1}: ${lung.status}
-            <ul>
-                <li>Pressão: ${lung.pressure} bar</li>
-                <li>Temperatura: ${lung.temperature} °C</li>
-            </ul>
-            </li>`;
+        doc.text(lung, 14, 182 + (index * 10));
     });
 
-    reportContent += `</ul>
-        <h2>Responsável pela Verificação</h2>
-        <p>${responsible}</p>
-        <h2>Fotos</h2>`;
+    doc.text(`Responsável pela Verificação: ${document.getElementById('responsible').value}`, 14, 232);
 
-    photos.forEach(photo => {
-        reportContent += `<img src="${photo}" style="max-width: 300px; max-height: 300px; margin: 10px;">`;
-    });
+    const photos = document.getElementById('photos').files;
+    let photoY = 242;
+    for (let i = 0; i < photos.length; i++) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = function() {
+                doc.addImage(img, 'JPEG', 14, photoY, 50, 50);
+                photoY += 60;
+                if (i === photos.length - 1) {
+                    doc.save('relatorio_compressores.pdf');
+                }
+            };
+        };
+        reader.readAsDataURL(photos[i]);
+    }
 
-    const opt = {
-        margin:       0,
-        filename:     'relatorio_compressores.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-
-    html2pdf().from(reportContent).set(opt).save();
+    if (photos.length === 0) {
+        doc.save('relatorio_compressores.pdf');
+    }
 });
