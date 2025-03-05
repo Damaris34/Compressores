@@ -3,64 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Compressores</title>
+    <title>Controle de Compressor</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Relatório de Compressores</h1>
-            <p class="subtitle">Detalhes Operacionais e Estatus dos Equipamentos</p>
-        </header>
-        <section class="info">
-            <div class="info-item">
-                <strong>Data/Horário:</strong>
-                <span id="data-hora">01/10/2023 14:30</span>
-            </div>
-            <div class="info-item">
-                <strong>Pressão/Temperatura:</strong>
-                <span id="pressao-temp">100 kPa / 25°C</span>
-            </div>
-            <div class="info-item">
-                <strong>Compressor em Funcionamento:</strong>
-                <span id="compressor-status">Sim</span>
-            </div>
-        </section>
-        <section class="equipamentos">
-            <h2>Compressores</h2>
-            <ul>
-                <li>1 Altas</li>
-                <li>1 Atlas</li>
-                <li>1 Schuz</li>
-                <li>1 Schuz</li>
-                <li>1 Interface</li>
-            </ul>
-        </section>
-        <section class="equipamentos">
-            <h2>Secadores</h2>
-            <ul>
-                <li>1 SCM</li>
-                <li>1 Schuz</li>
-            </ul>
-        </section>
-        <section class="equipamentos">
-            <h2>Pulmões</h2>
-            <p>Quantidade: 4</p>
-        </section>
-        <section class="responsavel">
-            <h2>Responsável</h2>
-            <p>Nome do Responsável</p>
-        </section>
-        <section class="fotos">
-            <h2>Fotos</h2>
-            <div class="foto-container">
-                <img src="foto1.jpg" alt="Foto 1">
-                <img src="foto2.jpg" alt="Foto 2">
-            </div>
-        </section>
-        <button id="gerar-pdf">Gerar PDF</button>
+        <h1>Controle de Compressor</h1>
+        <div class="data-hora" id="data-hora"></div>
+        <div class="info">
+            <p>Pressão: <span id="pressao">0</span> bar</p>
+            <p>Temperatura: <span id="temperatura">0</span> °C</p>
+            <p>Compressor em operação: <span id="compressor-status">Não</span></p>
+            <p>Responsável: <span id="responsavel">Não definido</span></p>
+        </div>
+        <button onclick="gerarRelatorio()">Gerar Relatório PDF</button>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
