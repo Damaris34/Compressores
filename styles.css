@@ -21,7 +21,7 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
-.compressor-info {
+.compressor-info, .compressor-details, .dryer-details, .lung-details {
     margin-bottom: 10px;
 }
 
