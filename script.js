@@ -12,78 +12,84 @@ updateDateTime(); // Atualizar imediatamente ao carregar a página
 
 // Dados fictícios para compressores, secadores e pulmões
 const compressors = [
-    { name: 'Compressor 1', status: 'Operando', image: 'compressor1.jpg' },
-    { name: 'Compressor 2', status: 'Parado', image: 'compressor2.jpg' },
-    // Adicione mais compressores conforme necessário
+    { name: 'Compressor 1', status: 'Operando' },
+    { name: 'Compressor 2', status: 'Parado' },
+    { name: 'Compressor 3', status: 'Operando' },
+    { name: 'Compressor 4', status: 'Parado' },
+    { name: 'Compressor 5', status: 'Operando' },
 ];
 
 const dryers = [
-    { name: 'Secador 1', status: 'Operando', image: 'dryer1.jpg' },
-    { name: 'Secador 2', status: 'Parado', image: 'dryer2.jpg' },
+    { name: 'Secador 1', status: 'Operando' },
+    { name: 'Secador 2', status: 'Parado' },
 ];
 
 const lungs = [
-    { name: 'Pulmão 1', status: 'Operando', image: 'lung1.jpg' },
-    { name: 'Pulmão 2', status: 'Parado', image: 'lung2.jpg' },
-    // Adicione mais pulmões conforme necessário
+    { name: 'Pulmão 1', status: 'Operando' },
+    { name: 'Pulmão 2', status: 'Parado' },
+    { name: 'Pulmão 3', status: 'Operando' },
+    { name: 'Pulmão 4', status: 'Parado' },
 ];
 
 // Função para adicionar itens ao DOM
-function addItemsToDOM(containerId, items) {
-    const container = document.getElementById(containerId);
+function addItemsToTable(tableId, items) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector('tbody');
     items.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('item');
-        itemDiv.innerHTML = `
-            <span>${item.name} - ${item.status}</span>
-            <div>
-                <input type="text" placeholder="Pressão" class="pressure">
-                <input type="text" placeholder="Temperatura" class="temperature">
-            </div>
-            <img src="${item.image}" alt="${item.name}">
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td><input type="text" placeholder="Pressão"></td>
+            <td><input type="text" placeholder="Temperatura"></td>
+            <td><input type="text" placeholder="Em Funcionamento" value="${item.status}"></td>
         `;
-        container.appendChild(itemDiv);
+        tbody.appendChild(row);
     });
 }
 
 // Adicionar compressores, secadores e pulmões ao DOM
-addItemsToDOM('compressors', compressors);
-addItemsToDOM('dryers', dryers);
-addItemsToDOM('lungs', lungs);
+addItemsToTable('compressors-table', compressors);
+addItemsToTable('dryers-table', dryers);
+addItemsToTable('lungs-table', lungs);
 
 // Função para gerar o PDF
 function generatePDF() {
     const { jsPDF } = window.jspdf;
-
     const doc = new jsPDF();
 
     doc.text("Relatório de Operação", 10, 10);
     doc.text(`Data/Horário: ${document.getElementById('datetime').textContent}`, 10, 20);
-    doc.text(`Responsável pela Medição: ${document.getElementById('responsible').value}`, 10, 30);
 
-    doc.text("Compressores:", 10, 40);
-    document.querySelectorAll('#compressors .item').forEach((compressor, index) => {
-        const name = compressor.querySelector('span').textContent;
-        const pressure = compressor.querySelector('.pressure').value;
-        const temperature = compressor.querySelector('.temperature').value;
-        doc.text(`${name} - Pressão: ${pressure}, Temperatura: ${temperature}`, 10, 50 + (index * 10));
-    });
+    const addTableToPDF = (tableId, title, y) => {
+        doc.text(title, 10, y);
+        const table = document.getElementById(tableId);
+        const rows = table.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+            const cells = row.querySelectorAll('td, th');
+            const text = Array.from(cells).map(cell => cell.textContent.trim() || cell.querySelector('input').value);
+            doc.text(text.join(' - '), 10, y + 10 + (index * 10));
+        });
+    };
 
-    doc.text("Secadores:", 10, 90);
-    document.querySelectorAll('#dryers .item').forEach((dryer, index) => {
-        const name = dryer.querySelector('span').textContent;
-        const pressure = dryer.querySelector('.pressure').value;
-        const temperature = dryer.querySelector('.temperature').value;
-        doc.text(`${name} - Pressão: ${pressure}, Temperatura: ${temperature}`, 10, 100 + (index * 10));
-    });
+    let y = 30;
+    addTableToPDF('compressors-table', 'Compressores', y);
+    y += 70;
+    addTableToPDF('dryers-table', 'Secadores', y);
+    y += 50;
+    addTableToPDF('lungs-table', 'Pulmões', y);
+    y += 60;
 
-    doc.text("Pulmões:", 10, 140);
-    document.querySelectorAll('#lungs .item').forEach((lung, index) => {
-        const name = lung.querySelector('span').textContent;
-        const pressure = lung.querySelector('.pressure').value;
-        const temperature = lung.querySelector('.temperature').value;
-        doc.text(`${name} - Pressão: ${pressure}, Temperatura: ${temperature}`, 10, 150 + (index * 10));
-    });
+    doc.text(`Responsável: ${document.getElementById('responsible').value}`, 10, y);
 
-    doc.save("relatorio_operacao.pdf");
+    const photoInput = document.getElementById('photo');
+    if (photoInput.files.length > 0) {
+        const img = new Image();
+        img.src = URL.createObjectURL(photoInput.files[0]);
+        img.onload = () => {
+            doc.addImage(img, 'JPEG', 10, y + 10, 50, 50);
+            doc.save("relatorio_operacao.pdf");
+        };
+    } else {
+        doc.save("relatorio_operacao.pdf");
+    }
 }
