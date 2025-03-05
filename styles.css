@@ -16,8 +16,30 @@ body {
     text-align: center;
 }
 
-.info p {
-    margin: 10px 0;
+.info h2 {
+    margin-top: 20px;
+}
+
+.compressor-group, .secador-group, .pulmao-group {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.compressor, .secador, .pulmao {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 150px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 input[type="file"] {
