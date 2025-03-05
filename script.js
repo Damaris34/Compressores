@@ -10,17 +10,32 @@ async function gerarRelatorio() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    const pressao = document.getElementById('pressao').textContent;
-    const temperatura = document.getElementById('temperatura').textContent;
-    const compressorStatus = document.getElementById('compressor-status').textContent;
-    const responsavel = document.getElementById('responsavel').textContent;
-
     doc.text('Relatório de Controle de Compressor', 10, 10);
     doc.text(`Data/Hora: ${new Date().toLocaleString()}`, 10, 20);
-    doc.text(`Pressão: ${pressao} bar`, 10, 30);
-    doc.text(`Temperatura: ${temperatura} °C`, 10, 40);
-    doc.text(`Compressor em operação: ${compressorStatus}`, 10, 50);
-    doc.text(`Responsável: ${responsavel}`, 10, 60);
+
+    // Adicionar informações dos compressores
+    for (let i = 1; i <= 5; i++) {
+        const pressao = document.getElementById(`pressao-c${i}`).value;
+        const temperatura = document.getElementById(`temperatura-c${i}`).value;
+        doc.text(`Compressor ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 30 + (i * 10));
+    }
+
+    // Adicionar informações dos secadores
+    for (let i = 1; i <= 2; i++) {
+        const pressao = document.getElementById(`pressao-s${i}`).value;
+        const temperatura = document.getElementById(`temperatura-s${i}`).value;
+        doc.text(`Secador ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 90 + (i * 10));
+    }
+
+    // Adicionar informações dos pulmões
+    for (let i = 1; i <= 4; i++) {
+        const pressao = document.getElementById(`pressao-p${i}`).value;
+        const temperatura = document.getElementById(`temperatura-p${i}`).value;
+        doc.text(`Pulmão ${i} - Pressão: ${pressao} bar, Temperatura: ${temperatura} °C`, 10, 120 + (i * 10));
+    }
+
+    const responsavel = document.getElementById('responsavel').value;
+    doc.text(`Responsável: ${responsavel}`, 10, 170);
 
     // Adicionar foto ao PDF
     const fotoInput = document.getElementById('foto-input');
@@ -29,7 +44,7 @@ async function gerarRelatorio() {
         const img = new Image();
         img.src = URL.createObjectURL(file);
         img.onload = function () {
-            doc.addImage(img, 'JPEG', 10, 70, 50, 50);
+            doc.addImage(img, 'JPEG', 10, 180, 50, 50);
             doc.save('relatorio_compressor.pdf');
         };
     } else {
@@ -39,9 +54,3 @@ async function gerarRelatorio() {
 
 // Atualizar a data e hora a cada segundo
 setInterval(atualizarDataHora, 1000);
-
-// Exemplo de atualização dos dados (substituir por dados reais)
-document.getElementById('pressao').textContent = '5.2';
-document.getElementById('temperatura').textContent = '25';
-document.getElementById('compressor-status').textContent = 'Sim';
-document.getElementById('responsavel').textContent = 'João Silva';
