@@ -36,6 +36,10 @@ function addItemsToDOM(containerId, items) {
         itemDiv.classList.add('item');
         itemDiv.innerHTML = `
             <span>${item.name} - ${item.status}</span>
+            <div>
+                <input type="text" placeholder="Pressão" class="pressure">
+                <input type="text" placeholder="Temperatura" class="temperature">
+            </div>
             <img src="${item.image}" alt="${item.name}">
         `;
         container.appendChild(itemDiv);
@@ -55,23 +59,30 @@ function generatePDF() {
 
     doc.text("Relatório de Operação", 10, 10);
     doc.text(`Data/Horário: ${document.getElementById('datetime').textContent}`, 10, 20);
-    doc.text(`Pressão: ${document.getElementById('pressure').textContent}`, 10, 30);
-    doc.text(`Temperatura: ${document.getElementById('temperature').textContent}`, 10, 40);
-    doc.text(`Responsável: ${document.getElementById('responsible').textContent}`, 10, 50);
+    doc.text(`Responsável pela Medição: ${document.getElementById('responsible').value}`, 10, 30);
 
-    doc.text("Compressores:", 10, 60);
-    compressors.forEach((compressor, index) => {
-        doc.text(`${compressor.name} - ${compressor.status}`, 10, 70 + (index * 10));
+    doc.text("Compressores:", 10, 40);
+    document.querySelectorAll('#compressors .item').forEach((compressor, index) => {
+        const name = compressor.querySelector('span').textContent;
+        const pressure = compressor.querySelector('.pressure').value;
+        const temperature = compressor.querySelector('.temperature').value;
+        doc.text(`${name} - Pressão: ${pressure}, Temperatura: ${temperature}`, 10, 50 + (index * 10));
     });
 
-    doc.text("Secadores:", 10, 120);
-    dryers.forEach((dryer, index) => {
-        doc.text(`${dryer.name} - ${dryer.status}`, 10, 130 + (index * 10));
+    doc.text("Secadores:", 10, 90);
+    document.querySelectorAll('#dryers .item').forEach((dryer, index) => {
+        const name = dryer.querySelector('span').textContent;
+        const pressure = dryer.querySelector('.pressure').value;
+        const temperature = dryer.querySelector('.temperature').value;
+        doc.text(`${name} - Pressão: ${pressure}, Temperatura: ${temperature}`, 10, 100 + (index * 10));
     });
 
-    doc.text("Pulmões:", 10, 160);
-    lungs.forEach((lung, index) => {
-        doc.text(`${lung.name} - ${lung.status}`, 10, 170 + (index * 10));
+    doc.text("Pulmões:", 10, 140);
+    document.querySelectorAll('#lungs .item').forEach((lung, index) => {
+        const name = lung.querySelector('span').textContent;
+        const pressure = lung.querySelector('.pressure').value;
+        const temperature = lung.querySelector('.temperature').value;
+        doc.text(`${name} - Pressão: ${pressure}, Temperatura: ${temperature}`, 10, 150 + (index * 10));
     });
 
     doc.save("relatorio_operacao.pdf");
