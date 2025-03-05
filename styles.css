@@ -1,11 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 .container {
@@ -16,10 +17,42 @@ body {
     text-align: center;
 }
 
-.info-box {
+.info p {
+    margin: 10px 0;
+}
+
+.section {
     margin-top: 20px;
 }
 
-.info-box p {
+.section h2 {
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 10px 0;
+}
+
+.item img {
+    max-width: 50px;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
