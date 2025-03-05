@@ -1,84 +1,33 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
 }
 
 .container {
-    width: 80%;
-    margin: 20px auto;
+    background-color: #fff;
     padding: 20px;
-    background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-header {
     text-align: center;
-    margin-bottom: 20px;
 }
 
-.subtitle {
-    font-size: 1.2em;
-    color: #777;
-}
-
-.info, .equipamentos, .responsavel, .fotos {
-    margin-bottom: 20px;
-}
-
-.info-item {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.equipamentos h2, .responsavel h2, .fotos h2 {
-    border-bottom: 2px solid #007BFF;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
-
-.equipamentos ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.equipamentos li {
-    background: #f9f9f9;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border-left: 5px solid #007BFF;
-}
-
-.foto-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.foto-container img {
-    max-width: 45%;
+.info p {
     margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
-    display: block;
-    width: 100%;
-    padding: 15px;
+    margin-top: 20px;
+    padding: 10px 20px;
     background-color: #007BFF;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
 }
 
 button:hover {
