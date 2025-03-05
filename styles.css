@@ -43,6 +43,11 @@ body {
     border-radius: 5px;
 }
 
+.item input {
+    width: 60px;
+    margin-right: 5px;
+}
+
 button {
     margin-top: 20px;
     padding: 10px 20px;
