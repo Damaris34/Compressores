@@ -9,127 +9,61 @@
 <body>
     <div class="container">
         <h1>Relatório de Compressores</h1>
-        <form id="report-form">
-            <div class="report-section">
-                <h2>Data/Horário</h2>
-                <input type="datetime-local" id="datetime" required>
+        <div class="report-section">
+            <h2>Data/Horário</h2>
+            <input type="datetime-local" id="datetime">
+        </div>
+        <div class="report-section">
+            <h2>Pressão/Temperatura/Compressor em Funcionamento</h2>
+            <div class="compressor-info">
+                <label for="pressure">Pressão:</label>
+                <input type="text" id="pressure">
             </div>
-            <div class="report-section">
-                <h2>Compressores</h2>
-                <div class="compressor-list">
-                    <div class="compressor">
-                        <label>Compressor 1 (Atlas):</label>
-                        <input type="checkbox" id="compressor1">
-                        <label>Pressão:</label>
-                        <input type="number" id="compressor1-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="compressor1-temperature" step="0.01">
-                    </div>
-                    <div class="compressor">
-                        <label>Compressor 2 (Atlas):</label>
-                        <input type="checkbox" id="compressor2">
-                        <label>Pressão:</label>
-                        <input type="number" id="compressor2-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="compressor2-temperature" step="0.01">
-                    </div>
-                    <div class="compressor">
-                        <label>Compressor 3 (Schuz):</label>
-                        <input type="checkbox" id="compressor3">
-                        <label>Pressão:</label>
-                        <input type="number" id="compressor3-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="compressor3-temperature" step="0.01">
-                    </div>
-                    <div class="compressor">
-                        <label>Compressor 4 (Schuz):</label>
-                        <input type="checkbox" id="compressor4">
-                        <label>Pressão:</label>
-                        <input type="number" id="compressor4-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="compressor4-temperature" step="0.01">
-                    </div>
-                    <div class="compressor">
-                        <label>Compressor 5 (Interface):</label>
-                        <input type="checkbox" id="compressor5">
-                        <label>Pressão:</label>
-                        <input type="number" id="compressor5-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="compressor5-temperature" step="0.01">
-                    </div>
-                </div>
+            <div class="compressor-info">
+                <label for="temperature">Temperatura:</label>
+                <input type="text" id="temperature">
             </div>
-            <div class="report-section">
-                <h2>Secadores</h2>
-                <div class="dryer-list">
-                    <div class="dryer">
-                        <label>Secador 1 (SCM):</label>
-                        <input type="checkbox" id="dryer1">
-                        <label>Pressão:</label>
-                        <input type="number" id="dryer1-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="dryer1-temperature" step="0.01">
-                    </div>
-                    <div class="dryer">
-                        <label>Secador 2 (Schuz):</label>
-                        <input type="checkbox" id="dryer2">
-                        <label>Pressão:</label>
-                        <input type="number" id="dryer2-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="dryer2-temperature" step="0.01">
-                    </div>
-                </div>
+            <div class="compressor-info">
+                <label for="compressor">Compressor em Funcionamento:</label>
+                <input type="text" id="compressor">
             </div>
-            <div class="report-section">
-                <h2>Pulmões (Vasos de Pressão)</h2>
-                <div class="lung-list">
-                    <div class="lung">
-                        <label>Pulmão 1:</label>
-                        <input type="checkbox" id="lung1">
-                        <label>Pressão:</label>
-                        <input type="number" id="lung1-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="lung1-temperature" step="0.01">
-                    </div>
-                    <div class="lung">
-                        <label>Pulmão 2:</label>
-                        <input type="checkbox" id="lung2">
-                        <label>Pressão:</label>
-                        <input type="number" id="lung2-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="lung2-temperature" step="0.01">
-                    </div>
-                    <div class="lung">
-                        <label>Pulmão 3:</label>
-                        <input type="checkbox" id="lung3">
-                        <label>Pressão:</label>
-                        <input type="number" id="lung3-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="lung3-temperature" step="0.01">
-                    </div>
-                    <div class="lung">
-                        <label>Pulmão 4:</label>
-                        <input type="checkbox" id="lung4">
-                        <label>Pressão:</label>
-                        <input type="number" id="lung4-pressure" step="0.01">
-                        <label>Temperatura:</label>
-                        <input type="number" id="lung4-temperature" step="0.01">
-                    </div>
-                </div>
-            </div>
-            <div class="report-section">
-                <h2>Responsável pela Verificação</h2>
-                <input type="text" id="responsible" required>
-            </div>
-            <div class="report-section">
-                <h2>Adicionar Fotos</h2>
-                <input type="file" id="photo-upload" accept="image/*" multiple>
-                <div id="photo-preview"></div>
-            </div>
-            <button type="button" id="generate-pdf">Gerar PDF</button>
-        </form>
+        </div>
+        <div class="report-section">
+            <h2>Compressores</h2>
+            <ul id="compressor-list">
+                <li>Atlas 1</li>
+                <li>Atlas 2</li>
+                <li>Schuz 1</li>
+                <li>Schuz 2</li>
+                <li>Interface</li>
+            </ul>
+        </div>
+        <div class="report-section">
+            <h2>Secadores</h2>
+            <ul id="dryer-list">
+                <li>SCM</li>
+                <li>Schuz</li>
+            </ul>
+        </div>
+        <div class="report-section">
+            <h2>Pulmões (Vasos de Pressão)</h2>
+            <ul id="lung-list">
+                <li>Pulmão 1</li>
+                <li>Pulmão 2</li>
+                <li>Pulmão 3</li>
+                <li>Pulmão 4</li>
+            </ul>
+        </div>
+        <div class="report-section">
+            <h2>Responsável pela Verificação</h2>
+            <input type="text" id="responsible">
+        </div>
+        <div class="report-section">
+            <h2>Adicionar Fotos</h2>
+            <input type="file" id="photos" multiple>
+        </div>
+        <button id="generate-pdf">Gerar PDF</button>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
