@@ -1,126 +1,74 @@
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+document.getElementById('photo-upload').addEventListener('change', function(event) {
+    const preview = document.getElementById('photo-preview');
+    preview.innerHTML = '';
+    const files = event.target.files;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
 
-public class CompressorReportApp {
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            preview.appendChild(img);
+        };
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Relatório de Compressores");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(600, 400);
-            frame.setLayout(new GridLayout(0, 2, 10, 10));
-            frame.setLocationRelativeTo(null);
-
-            JPanel panel = new JPanel();
-            panel.setLayout(new GridLayout(0, 2, 10, 10));
-            panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-            JLabel dateTimeLabel = new JLabel("Data/Horário:");
-            JTextField dateTimeField = new JTextField();
-
-            JLabel pressureLabel = new JLabel("Pressão:");
-            JTextField pressureField = new JTextField();
-
-            JLabel temperatureLabel = new JLabel("Temperatura:");
-            JTextField temperatureField = new JTextField();
-
-            JLabel responsibleLabel = new JLabel("Responsável:");
-            JTextField responsibleField = new JTextField();
-
-            JCheckBox[] compressors = new JCheckBox[5];
-            JCheckBox[] dryers = new JCheckBox[2];
-            JCheckBox[] lungs = new JCheckBox[4];
-
-            for (int i = 0; i < 5; i++) {
-                compressors[i] = new JCheckBox("Compressor " + (i + 1));
-                panel.add(compressors[i]);
-            }
-
-            for (int i = 0; i < 2; i++) {
-                dryers[i] = new JCheckBox("Secador " + (i + 1));
-                panel.add(dryers[i]);
-            }
-
-            for (int i = 0; i < 4; i++) {
-                lungs[i] = new JCheckBox("Pulmão " + (i + 1));
-                panel.add(lungs[i]);
-            }
-
-            panel.add(dateTimeLabel);
-            panel.add(dateTimeField);
-            panel.add(pressureLabel);
-            panel.add(pressureField);
-            panel.add(temperatureLabel);
-            panel.add(temperatureField);
-            panel.add(responsibleLabel);
-            panel.add(responsibleField);
-
-            JButton generateButton = new JButton("Gerar PDF");
-            generateButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String dateTime = dateTimeField.getText();
-                    String pressure = pressureField.getText();
-                    String temperature = temperatureField.getText();
-                    String responsible = responsibleField.getText();
-
-                    StringBuilder compressorStatus = new StringBuilder();
-                    for (int i = 0; i < 5; i++) {
-                        compressorStatus.append("Compressor ").append(i + 1).append(": ")
-                                .append(compressors[i].isSelected() ? "Sim" : "Não").append("\n");
-                    }
-
-                    StringBuilder dryerStatus = new StringBuilder();
-                    for (int i = 0; i < 2; i++) {
-                        dryerStatus.append("Secador ").append(i + 1).append(": ")
-                                .append(dryers[i].isSelected() ? "Sim" : "Não").append("\n");
-                    }
-
-                    StringBuilder lungStatus = new StringBuilder();
-                    for (int i = 0; i < 4; i++) {
-                        lungStatus.append("Pulmão ").append(i + 1).append(": ")
-                                .append(lungs[i].isSelected() ? "Sim" : "Não").append("\n");
-                    }
-
-                    generatePDF(dateTime, compressorStatus.toString(), dryerStatus.toString(),
-                            lungStatus.toString(), pressure, temperature, responsible);
-                }
-            });
-
-            panel.add(generateButton);
-            frame.add(panel);
-            frame.setVisible(true);
-        });
+        reader.readAsDataURL(file);
     }
+});
 
-    private static void generatePDF(String dateTime, String compressorStatus, String dryerStatus,
-                                    String lungStatus, String pressure, String temperature, String responsible) {
-        try {
-            PdfWriter writer = new PdfWriter("relatorio_compressores.pdf");
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
+document.getElementById('generate-pdf').addEventListener('click', function() {
+    const datetime = document.getElementById('datetime').value;
+    const compressors = Array.from(document.querySelectorAll('.compressor input')).map(c => c.checked ? 'Sim' : 'Não');
+    const dryers = Array.from(document.querySelectorAll('.dryer input')).map(d => d.checked ? 'Sim' : 'Não');
+    const lungs = Array.from(document.querySelectorAll('.lung input')).map(l => l.checked ? 'Sim' : 'Não');
+    const pressure = document.getElementById('pressure').value;
+    const temperature = document.getElementById('temperature').value;
+    const responsible = document.getElementById('responsible').value;
+    const photos = Array.from(document.querySelectorAll('#photo-preview img')).map(img => img.src);
 
-            document.add(new Paragraph("Relatório de Compressores"));
-            document.add(new Paragraph("Data/Horário: " + dateTime));
-            document.add(new Paragraph("Compressores:\n" + compressorStatus));
-            document.add(new Paragraph("Secadores:\n" + dryerStatus));
-            document.add(new Paragraph("Pulmões:\n" + lungStatus));
-            document.add(new Paragraph("Pressão: " + pressure + " bar"));
-            document.add(new Paragraph("Temperatura: " + temperature + " °C"));
-            document.add(new Paragraph("Responsável pela Verificação: " + responsible));
+    let reportContent = `
+        <h1>Relatório de Compressores</h1>
+        <p><strong>Data/Horário:</strong> ${datetime}</p>
+        <h2>Compressores</h2>
+        <ul>
+            <li>Compressor 1: ${compressors[0]}</li>
+            <li>Compressor 2: ${compressors[1]}</li>
+            <li>Compressor 3: ${compressors[2]}</li>
+            <li>Compressor 4: ${compressors[3]}</li>
+            <li>Compressor 5: ${compressors[4]}</li>
+        </ul>
+        <h2>Secadores</h2>
+        <ul>
+            <li>Secador 1: ${dryers[0]}</li>
+            <li>Secador 2: ${dryers[1]}</li>
+        </ul>
+        <h2>Pulmões</h2>
+        <ul>
+            <li>Pulmão 1: ${lungs[0]}</li>
+            <li>Pulmão 2: ${lungs[1]}</li>
+            <li>Pulmão 3: ${lungs[2]}</li>
+            <li>Pulmão 4: ${lungs[3]}</li>
+        </ul>
+        <h2>Pressão/Temperatura</h2>
+        <p><strong>Pressão:</strong> ${pressure} bar</p>
+        <p><strong>Temperatura:</strong> ${temperature} °C</p>
+        <h2>Responsável pela Verificação</h2>
+        <p>${responsible}</p>
+        <h2>Fotos</h2>
+    `;
 
-            document.close();
-            JOptionPane.showMessageDialog(null, "PDF gerado com sucesso!");
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao gerar PDF: " + e.getMessage());
-        }
-    }
-}
+    photos.forEach(photo => {
+        reportContent += `<img src="${photo}" style="max-width: 100px; max-height: 100px; margin: 5px;">`;
+    });
+
+    const opt = {
+        margin:       0,
+        filename:     'relatorio_compressores.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().from(reportContent).set(opt).save();
+});
