@@ -14,24 +14,25 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 300px;
 }
 
 .info h2 {
     margin-top: 20px;
+    text-align: left;
 }
 
 .compressor-group, .secador-group, .pulmao-group {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .compressor, .secador, .pulmao {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px;
     border-radius: 5px;
-    width: 150px;
+    text-align: left;
 }
 
 input[type="text"] {
