@@ -6,7 +6,7 @@ function atualizarDataHora() {
 }
 
 // Função para gerar o relatório em PDF
-function gerarRelatorio() {
+async function gerarRelatorio() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
@@ -22,7 +22,19 @@ function gerarRelatorio() {
     doc.text(`Compressor em operação: ${compressorStatus}`, 10, 50);
     doc.text(`Responsável: ${responsavel}`, 10, 60);
 
-    doc.save('relatorio_compressor.pdf');
+    // Adicionar foto ao PDF
+    const fotoInput = document.getElementById('foto-input');
+    if (fotoInput.files.length > 0) {
+        const file = fotoInput.files[0];
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        img.onload = function () {
+            doc.addImage(img, 'JPEG', 10, 70, 50, 50);
+            doc.save('relatorio_compressor.pdf');
+        };
+    } else {
+        doc.save('relatorio_compressor.pdf');
+    }
 }
 
 // Atualizar a data e hora a cada segundo
