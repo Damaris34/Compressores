@@ -30,6 +30,13 @@ h1, h2 {
 
 .compressor, .dryer, .lung {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.compressor label, .dryer label, .lung label {
+    margin-right: 10px;
 }
 
 input[type="datetime-local"], input[type="number"], input[type="text"], input[type="file"] {
