@@ -10,18 +10,21 @@ function updateDateTime() {
 setInterval(updateDateTime, 1000);
 updateDateTime(); // Atualizar imediatamente ao carregar a página
 
-// Dados fictícios para compressores, secadores e pulmões
-const compressors = [
-    { name: 'Compressor 1', status: 'Operando' },
-    { name: 'Compressor 2', status: 'Parado' },
-    { name: 'Compressor 3', status: 'Operando' },
-    { name: 'Compressor 4', status: 'Parado' },
-    { name: 'Compressor 5', status: 'Operando' },
+// Dados fictícios para Atlas, Schuz, Interface, secadores e pulmões
+const atlasSchuz = [
+    { name: 'Atlas 1', status: 'Operando' },
+    { name: 'Atlas 2', status: 'Parado' },
+    { name: 'Schuz 1', status: 'Operando' },
+    { name: 'Schuz 2', status: 'Parado' },
+];
+
+const interfaceItems = [
+    { name: 'Interface 1', status: 'Operando' },
 ];
 
 const dryers = [
-    { name: 'Secador 1', status: 'Operando' },
-    { name: 'Secador 2', status: 'Parado' },
+    { name: 'SMC 1', status: 'Operando' },
+    { name: 'Schuz 1', status: 'Parado' },
 ];
 
 const lungs = [
@@ -47,8 +50,9 @@ function addItemsToTable(tableId, items) {
     });
 }
 
-// Adicionar compressores, secadores e pulmões ao DOM
-addItemsToTable('compressors-table', compressors);
+// Adicionar Atlas, Schuz, Interface, secadores e pulmões ao DOM
+addItemsToTable('atlas-schuz-table', atlasSchuz);
+addItemsToTable('interface-table', interfaceItems);
 addItemsToTable('dryers-table', dryers);
 addItemsToTable('lungs-table', lungs);
 
@@ -72,8 +76,10 @@ function generatePDF() {
     };
 
     let y = 30;
-    addTableToPDF('compressors-table', 'Compressores', y);
+    addTableToPDF('atlas-schuz-table', 'Atlas e Schuz', y);
     y += 70;
+    addTableToPDF('interface-table', 'Interface', y);
+    y += 50;
     addTableToPDF('dryers-table', 'Secadores', y);
     y += 50;
     addTableToPDF('lungs-table', 'Pulmões', y);
