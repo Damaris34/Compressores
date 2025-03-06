@@ -64,56 +64,34 @@ addItemsToTable('lungs-table', lungs);
 // Função para gerar o PDF
 function generatePDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'mm', 'a4');
-
-    const addTableToPDF = (tableId, title) => {
-        const table = document.getElementById(tableId);
-        const rows = table.querySelectorAll('tr');
-        let startY = doc.autoTableEndPosY + 5;
-
-        doc.setFontSize(16);
-        doc.text(title, 10, startY);
-        startY += 10;
-
-        doc.autoTable({
-            startY: startY,
-            head: [['Nome', 'Pressão', 'Temperatura', 'Em Funcionamento']],
-            body: Array.from(rows).slice(1).map(row => {
-                const cells = row.querySelectorAll('td');
-                return [
-                    cells[0].textContent,
-                    cells[1].querySelector('input').value,
-                    cells[2].querySelector('input').value,
-                    cells[3].querySelector('select').value
-                ];
-            }),
-            theme: 'grid'
-        });
-    };
+    const doc = new jsPDF();
 
     doc.text("Relatório de Operação", 10, 10);
     doc.text(`Data/Horário: ${document.getElementById('datetime').textContent}`, 10, 20);
 
-    addTableToPDF('atlas-schuz-table', 'Atlas e Schuz');
-    addTableToPDF('interface-table', 'Interface');
-    addTableToPDF('dryers-table', 'Secadores');
-    addTableToPDF('lungs-table', 'Pulmões');
+    const addTableToPDF = (tableId, title, y) => {
+        doc.setFontSize(16);
+        doc.text(title, 10, y);
+        const table = document.getElementById(tableId);
+        const rows = table.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+            const cells = row.querySelectorAll('td, th');
+            const text = Array.from(cells).map(cell => cell.textContent.trim() || cell.querySelector('input').value || cell.querySelector('select').value);
+            doc.text(text.join(' - '), 10, y + 10 + (index * 10));
+        });
+    };
 
-    doc.text(`Responsável: ${document.getElementById('responsible').value}`, 10, doc.autoTableEndPosY + 10);
+    let y = 30;
+    addTableToPDF('atlas-schuz-table', 'Atlas e Schuz', y);
+    y += 80;
+    addTableToPDF('interface-table', 'Interface', y);
+    y += 60;
+    addTableToPDF('dryers-table', 'Secadores', y);
+    y += 60;
+    addTableToPDF('lungs-table', 'Pulmões', y);
+    y += 70;
 
-    const photoInput = document.getElementById('photo');
-    if (photoInput.files.length > 0) {
-        const img = new Image();
-        img.src = URL.createObjectURL(photoInput.files[0]);
-        img.onload = () => {
-            const imgWidth = 50;
-            const imgHeight = 50;
-            const pageHeight = doc.internal.pageSize.height;
-            const yPosition = pageHeight - imgHeight - 10;
-            doc.addImage(img, 'JPEG', 10, yPosition, imgWidth, imgHeight);
-            doc.save("relatorio_operacao.pdf");
-        };
-    } else {
-        doc.save("relatorio_operacao.pdf");
-    }
+    doc.text(`Responsável: ${document.getElementById('responsible').value}`, 10, y);
+
+    doc.save("relatorio_operacao.pdf");
 }
