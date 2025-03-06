@@ -61,6 +61,19 @@ addItemsToTable('interface-table', interfaceItems);
 addItemsToTable('dryers-table', dryers);
 addItemsToTable('lungs-table', lungs);
 
+// Função para exibir a prévia da foto
+document.getElementById('photo').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('photo-preview').src = e.target.result;
+            document.getElementById('photo-preview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 // Função para gerar o PDF
 function generatePDF() {
     const { jsPDF } = window.jspdf;
