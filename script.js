@@ -71,7 +71,7 @@ function generatePDF() {
         const rows = table.querySelectorAll('tr');
         let startY = doc.autoTableEndPosY + 5;
 
-        doc.setFontSize(12);
+        doc.setFontSize(16);
         doc.text(title, 10, startY);
         startY += 10;
 
