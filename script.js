@@ -42,10 +42,10 @@ function addItemsToTable(tableId, items) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${item.name}</td>
-            <td><input type="text" placeholder="Pressão"></td>
-            <td><input type="text" placeholder="Temperatura"></td>
+            <td><input type="text" placeholder="Pressão" class="input-field"></td>
+            <td><input type="text" placeholder="Temperatura" class="input-field"></td>
             <td>
-                <select>
+                <select class="input-field">
                     <option value="Operando" ${item.status === 'Operando' ? 'selected' : ''}>Operando</option>
                     <option value="Parado" ${item.status === 'Parado' ? 'selected' : ''}>Parado</option>
                 </select>
@@ -64,40 +64,53 @@ addItemsToTable('lungs-table', lungs);
 // Função para gerar o PDF
 function generatePDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    const doc = new jsPDF('p', 'mm', 'a4');
+
+    const addTableToPDF = (tableId, title) => {
+        const table = document.getElementById(tableId);
+        const rows = table.querySelectorAll('tr');
+        let startY = doc.autoTableEndPosY + 5;
+
+        doc.setFontSize(12);
+        doc.text(title, 10, startY);
+        startY += 10;
+
+        doc.autoTable({
+            startY: startY,
+            head: [['Nome', 'Pressão', 'Temperatura', 'Em Funcionamento']],
+            body: Array.from(rows).slice(1).map(row => {
+                const cells = row.querySelectorAll('td');
+                return [
+                    cells[0].textContent,
+                    cells[1].querySelector('input').value,
+                    cells[2].querySelector('input').value,
+                    cells[3].querySelector('select').value
+                ];
+            }),
+            theme: 'grid'
+        });
+    };
 
     doc.text("Relatório de Operação", 10, 10);
     doc.text(`Data/Horário: ${document.getElementById('datetime').textContent}`, 10, 20);
 
-    const addTableToPDF = (tableId, title, y) => {
-        doc.text(title, 10, y);
-        const table = document.getElementById(tableId);
-        const rows = table.querySelectorAll('tr');
-        rows.forEach((row, index) => {
-            const cells = row.querySelectorAll('td, th');
-            const text = Array.from(cells).map(cell => cell.textContent.trim() || cell.querySelector('input').value || cell.querySelector('select').value);
-            doc.text(text.join(' - '), 10, y + 10 + (index * 10));
-        });
-    };
+    addTableToPDF('atlas-schuz-table', 'Atlas e Schuz');
+    addTableToPDF('interface-table', 'Interface');
+    addTableToPDF('dryers-table', 'Secadores');
+    addTableToPDF('lungs-table', 'Pulmões');
 
-    let y = 30;
-    addTableToPDF('atlas-schuz-table', 'Atlas e Schuz', y);
-    y += 70;
-    addTableToPDF('interface-table', 'Interface', y);
-    y += 50;
-    addTableToPDF('dryers-table', 'Secadores', y);
-    y += 50;
-    addTableToPDF('lungs-table', 'Pulmões', y);
-    y += 60;
-
-    doc.text(`Responsável: ${document.getElementById('responsible').value}`, 10, y);
+    doc.text(`Responsável: ${document.getElementById('responsible').value}`, 10, doc.autoTableEndPosY + 10);
 
     const photoInput = document.getElementById('photo');
     if (photoInput.files.length > 0) {
         const img = new Image();
         img.src = URL.createObjectURL(photoInput.files[0]);
         img.onload = () => {
-            doc.addImage(img, 'JPEG', 10, y + 10, 50, 50);
+            const imgWidth = 50;
+            const imgHeight = 50;
+            const pageHeight = doc.internal.pageSize.height;
+            const yPosition = pageHeight - imgHeight - 10;
+            doc.addImage(img, 'JPEG', 10, yPosition, imgWidth, imgHeight);
             doc.save("relatorio_operacao.pdf");
         };
     } else {
