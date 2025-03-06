@@ -93,5 +93,19 @@ function generatePDF() {
 
     doc.text(`Responsável: ${document.getElementById('responsible').value}`, 10, y);
 
-    doc.save("relatorio_operacao.pdf");
+    const photoInput = document.getElementById('photo');
+    if (photoInput.files.length > 0) {
+        const img = new Image();
+        img.src = URL.createObjectURL(photoInput.files[0]);
+        img.onload = () => {
+            const imgWidth = 50;
+            const imgHeight = 50;
+            const pageHeight = doc.internal.pageSize.height;
+            const yPosition = pageHeight - imgHeight - 10;
+            doc.addImage(img, 'JPEG', 10, yPosition, imgWidth, imgHeight);
+            doc.save("relatorio_operacao.pdf");
+        };
+    } else {
+        doc.save("relatorio_operacao.pdf");
+    }
 }
