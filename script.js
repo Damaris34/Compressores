@@ -44,7 +44,12 @@ function addItemsToTable(tableId, items) {
             <td>${item.name}</td>
             <td><input type="text" placeholder="Pressão"></td>
             <td><input type="text" placeholder="Temperatura"></td>
-            <td><input type="text" placeholder="Em Funcionamento" value="${item.status}"></td>
+            <td>
+                <select>
+                    <option value="Operando" ${item.status === 'Operando' ? 'selected' : ''}>Operando</option>
+                    <option value="Parado" ${item.status === 'Parado' ? 'selected' : ''}>Parado</option>
+                </select>
+            </td>
         `;
         tbody.appendChild(row);
     });
@@ -70,7 +75,7 @@ function generatePDF() {
         const rows = table.querySelectorAll('tr');
         rows.forEach((row, index) => {
             const cells = row.querySelectorAll('td, th');
-            const text = Array.from(cells).map(cell => cell.textContent.trim() || cell.querySelector('input').value);
+            const text = Array.from(cells).map(cell => cell.textContent.trim() || cell.querySelector('input').value || cell.querySelector('select').value);
             doc.text(text.join(' - '), 10, y + 10 + (index * 10));
         });
     };
