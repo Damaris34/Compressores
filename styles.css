@@ -58,7 +58,7 @@ th {
     color: white;
 }
 
-input[type="text"], select {
+input[type="text"], input[type="file"], select {
     width: 90%;
     padding: 15px;
     margin: 10px auto;
