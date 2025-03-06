@@ -1,78 +1,119 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+// Função para atualizar a data e hora
+function updateDateTime() {
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString('pt-BR');
+    const formattedTime = now.toLocaleTimeString('pt-BR');
+    document.getElementById('datetime').textContent = `${formattedDate} ${formattedTime}`;
 }
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 80%;
+// Atualizar a data e hora a cada segundo
+setInterval(updateDateTime, 1000);
+updateDateTime(); // Atualizar imediatamente ao carregar a página
+
+// Dados fictícios para Atlas, Schuz, Interface, secadores e pulmões
+const atlasSchuz = [
+    { name: 'Atlas 1', status: 'Operando' },
+    { name: 'Atlas 2', status: 'Parado' },
+    { name: 'Schuz 1', status: 'Operando' },
+    { name: 'Schuz 2', status: 'Parado' },
+];
+
+const interfaceItems = [
+    { name: 'Interface 1', status: 'Operando' },
+];
+
+const dryers = [
+    { name: 'SMC 1', status: 'Operando' },
+    { name: 'Schuz 1', status: 'Parado' },
+];
+
+const lungs = [
+    { name: 'Pulmão 1', status: 'Operando' },
+    { name: 'Pulmão 2', status: 'Parado' },
+    { name: 'Pulmão 3', status: 'Operando' },
+    { name: 'Pulmão 4', status: 'Parado' },
+];
+
+// Função para adicionar itens ao DOM
+function addItemsToTable(tableId, items) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector('tbody');
+    items.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td><input type="text" placeholder="Pressão" class="input-field"></td>
+            <td><input type="text" placeholder="Temperatura" class="input-field"></td>
+            <td>
+                <select class="input-field">
+                    <option value="Operando" ${item.status === 'Operando' ? 'selected' : ''}>Operando</option>
+                    <option value="Parado" ${item.status === 'Parado' ? 'selected' : ''}>Parado</option>
+                </select>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
 }
 
-.info p {
-    margin: 10px 0;
-}
+// Adicionar Atlas, Schuz, Interface, secadores e pulmões ao DOM
+addItemsToTable('atlas-schuz-table', atlasSchuz);
+addItemsToTable('interface-table', interfaceItems);
+addItemsToTable('dryers-table', dryers);
+addItemsToTable('lungs-table', lungs);
 
-.section {
-    margin-top: 20px;
-    text-align: center;
-}
+// Função para gerar o PDF
+function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
 
-.section h2 {
-    border-bottom: 2px solid #007BFF;
-    padding-bottom: 5px;
-    display: inline-block;
-    margin-bottom: 15px;
-}
+    const addTableToPDF = (tableId, title) => {
+        const table = document.getElementById(tableId);
+        const rows = table.querySelectorAll('tr');
+        let startY = doc.autoTableEndPosY + 5;
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px auto;
-}
+        doc.setFontSize(12);
+        doc.text(title, 10, startY);
+        startY += 10;
 
-table, th, td {
-    border: 1px solid #ddd;
-}
+        doc.autoTable({
+            startY: startY,
+            head: [['Nome', 'Pressão', 'Temperatura', 'Em Funcionamento']],
+            body: Array.from(rows).slice(1).map(row => {
+                const cells = row.querySelectorAll('td');
+                return [
+                    cells[0].textContent,
+                    cells[1].querySelector('input').value,
+                    cells[2].querySelector('input').value,
+                    cells[3].querySelector('select').value
+                ];
+            }),
+            theme: 'grid'
+        });
+    };
 
-th, td {
-    padding: 15px;
-    text-align: center;
-}
+    doc.text("Relatório de Operação", 10, 10);
+    doc.text(`Data/Horário: ${document.getElementById('datetime').textContent}`, 10, 20);
 
-th {
-    background-color: #007BFF;
-    color: white;
-}
+    addTableToPDF('atlas-schuz-table', 'Atlas e Schuz');
+    addTableToPDF('interface-table', 'Interface');
+    addTableToPDF('dryers-table', 'Secadores');
+    addTableToPDF('lungs-table', 'Pulmões');
 
-input[type="text"], input[type="file"], select {
-    width: 90%;
-    padding: 10px;
-    margin: 5px auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: block;
-}
+    doc.text(`Responsável: ${document.getElementById('responsible').value}`, 10, doc.autoTableEndPosY + 10);
 
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
+    const photoInput = document.getElementById('photo');
+    if (photoInput.files.length > 0) {
+        const img = new Image();
+        img.src = URL.createObjectURL(photoInput.files[0]);
+        img.onload = () => {
+            const imgWidth = 50;
+            const imgHeight = 50;
+            const pageHeight = doc.internal.pageSize.height;
+            const yPosition = pageHeight - imgHeight - 10;
+            doc.addImage(img, 'JPEG', 10, yPosition, imgWidth, imgHeight);
+            doc.save("relatorio_operacao.pdf");
+        };
+    } else {
+        doc.save("relatorio_operacao.pdf");
+    }
 }
