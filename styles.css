@@ -31,3 +31,109 @@ header {
 header h1 {
     font-size: 36px;
     color: #0056b3;
+    margin-bottom: 10px;
+}
+
+.info p {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section {
+    width: 100%;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.subsection {
+    margin-top: 20px;
+}
+
+.section h2, .subsection h3 {
+    border-bottom: 3px solid #007BFF;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 26px;
+    color: #007BFF;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th {
+    background-color: #007BFF;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+table td {
+    padding: 18px;
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+input[type="text"], input[type="file"], select {
+    width: calc(100% - 22px);
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+#photo-uploads {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#photo-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+#photo-previews img {
+    max-width: 30%;
+    border: 1px solid #ccc;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+button {
+    padding: 15px 30px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
