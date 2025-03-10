@@ -1,20 +1,22 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f2f5;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #333;
 }
 
 .container {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,17 +25,19 @@ body {
 header {
     text-align: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 header h1 {
-    font-size: 32px;
-    color: #007BFF;
+    font-size: 36px;
+    color: #0056b3;
+    margin-bottom: 10px;
 }
 
 .info p {
-    margin: 10px 0;
+    margin: 5px 0;
     font-size: 18px;
+    color: #555;
 }
 
 main {
@@ -49,12 +53,16 @@ main {
     text-align: left;
 }
 
-.section h2, .section h3 {
-    border-bottom: 2px solid #007BFF;
+.section h2, .subsection h3 {
+    border-bottom: 3px solid #007BFF;
     padding-bottom: 5px;
     margin-bottom: 15px;
-    font-size: 24px;
+    font-size: 26px;
     color: #007BFF;
+}
+
+.subsection {
+    margin-top: 20px;
 }
 
 table {
@@ -62,37 +70,39 @@ table {
     border-collapse: collapse;
     margin: 20px 0;
     font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 15px;
-    text-align: center;
-}
-
-th {
+table th {
     background-color: #007BFF;
     color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+table td {
+    padding: 18px;
+    text-align: left;
+    background-color: #f9f9f9;
 }
 
 input[type="text"], input[type="file"], select {
-    width: calc(100% - 22px); /* Ajusta para ocupar quase toda a largura da célula */
-    padding: 15px; /* Aumenta o padding para mais espaço */
+    width: calc(100% - 22px);
+    padding: 15px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     background-color: #f9f9f9;
-    box-sizing: border-box; /* Garantir que o padding seja incluído na largura total */
+    box-sizing: border-box;
 }
 
 footer {
     width: 100%;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 button {
