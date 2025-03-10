@@ -88,7 +88,7 @@ table td {
     background-color: #f9f9f9;
 }
 
-input[type="text"], input[type="file"], select {
+input[type="text"], input[type="file"] {
     width: calc(100% - 22px);
     padding: 15px;
     margin: 10px 0;
@@ -108,12 +108,13 @@ input[type="text"], input[type="file"], select {
 #photo-previews {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
     justify-content: center;
+    margin-top: 20px;
 }
 
 #photo-previews img {
-    max-width: 30%;
+    max-width: 45%;
     border: 1px solid #ccc;
 }
 
