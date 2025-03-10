@@ -1,34 +1,15 @@
-// Função para atualizar a data e hora
-function updateDateTime() {
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString('pt-BR');
-    const formattedTime = now.toLocaleTimeString('pt-BR');
-    document.getElementById('datetime').textContent = `${formattedDate} ${formattedTime}`;
-}
-
-// Atualizar a data e hora a cada segundo
-setInterval(updateDateTime, 1000);
-updateDateTime(); // Atualizar imediatamente ao carregar a página
-
 // Função para exibir a prévia da foto
-function setupPhotoPreview(inputId, previewId) {
-    document.getElementById(inputId).addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById(previewId).src = e.target.result;
-                document.getElementById(previewId).style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-// Configurar prévias para múltiplas fotos
-setupPhotoPreview('photo1', 'photo-preview1');
-setupPhotoPreview('photo2', 'photo-preview2');
-setupPhotoPreview('photo3', 'photo-preview3');
+document.getElementById('photo').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('photo-preview').src = e.target.result;
+            document.getElementById('photo-preview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
 
 // Função para gerar o PDF
 function generatePDF() {
