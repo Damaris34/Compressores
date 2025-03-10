@@ -12,7 +12,7 @@
         <header>
             <h1>Relatório de Operação</h1>
             <div class="info">
-                <p>Data/Horário: <span id="datetime"></span></p>
+                <p>Data/Horário: <span id="datetime">10/03/2025 14:57:16</span></p>
             </div>
         </header>
         <main>
@@ -32,27 +32,27 @@
                         <tbody>
                             <tr>
                                 <td>Atlas 1</td>
-                                <td>Pressão</td>
-                                <td>Temperatura</td>
-                                <td>Operando</td>
+                                <td><input type="text" placeholder="Pressão"></td>
+                                <td><input type="text" placeholder="Temperatura"></td>
+                                <td><select><option>Operando</option><option>Parado</option></select></td>
                             </tr>
                             <tr>
                                 <td>Atlas 2</td>
-                                <td>Pressão</td>
-                                <td>Temperatura</td>
-                                <td>Parado</td>
+                                <td><input type="text" placeholder="Pressão"></td>
+                                <td><input type="text" placeholder="Temperatura"></td>
+                                <td><select><option>Operando</option><option>Parado</option></select></td>
                             </tr>
                             <tr>
                                 <td>Schuz 1</td>
-                                <td>Pressão</td>
-                                <td>Temperatura</td>
-                                <td>Operando</td>
+                                <td><input type="text" placeholder="Pressão"></td>
+                                <td><input type="text" placeholder="Temperatura"></td>
+                                <td><select><option>Operando</option><option>Parado</option></select></td>
                             </tr>
                             <tr>
                                 <td>Schuz 2</td>
-                                <td>Pressão</td>
-                                <td>Temperatura</td>
-                                <td>Parado</td>
+                                <td><input type="text" placeholder="Pressão"></td>
+                                <td><input type="text" placeholder="Temperatura"></td>
+                                <td><select><option>Operando</option><option>Parado</option></select></td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,9 +71,9 @@
                         <tbody>
                             <tr>
                                 <td>Interface 1</td>
-                                <td>Pressão</td>
-                                <td>Temperatura</td>
-                                <td>Operando</td>
+                                <td><input type="text" placeholder="Pressão"></td>
+                                <td><input type="text" placeholder="Temperatura"></td>
+                                <td><select><option>Operando</option><option>Parado</option></select></td>
                             </tr>
                         </tbody>
                     </table>
@@ -93,15 +93,15 @@
                     <tbody>
                         <tr>
                             <td>SMC 1</td>
-                            <td>Pressão</td>
-                            <td>Temperatura</td>
-                            <td>Operando</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
                         </tr>
                         <tr>
                             <td>Schuz 1</td>
-                            <td>Pressão</td>
-                            <td>Temperatura</td>
-                            <td>Parado</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
                         </tr>
                     </tbody>
                 </table>
@@ -120,27 +120,27 @@
                     <tbody>
                         <tr>
                             <td>Pulmão 1</td>
-                            <td>Pressão</td>
-                            <td>Temperatura</td>
-                            <td>Operando</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
                         </tr>
                         <tr>
                             <td>Pulmão 2</td>
-                            <td>Pressão</td>
-                            <td>Temperatura</td>
-                            <td>Parado</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
                         </tr>
                         <tr>
                             <td>Pulmão 3</td>
-                            <td>Pressão</td>
-                            <td>Temperatura</td>
-                            <td>Operando</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
                         </tr>
                         <tr>
                             <td>Pulmão 4</td>
-                            <td>Pressão</td>
-                            <td>Temperatura</td>
-                            <td>Parado</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
                         </tr>
                     </tbody>
                 </table>
@@ -150,17 +150,9 @@
                 <input type="text" id="responsible" placeholder="Nome do Responsável">
             </section>
             <section class="section">
-                <h2>Fotos</h2>
-                <div id="photo-uploads">
-                    <input type="file" id="photo1" accept="image/*">
-                    <input type="file" id="photo2" accept="image/*">
-                    <input type="file" id="photo3" accept="image/*">
-                </div>
-                <div id="photo-previews">
-                    <img id="photo-preview1" src="" alt="Prévia da Foto 1" style="display:none; max-width: 100%; border: 1px solid #ccc;">
-                    <img id="photo-preview2" src="" alt="Prévia da Foto 2" style="display:none; max-width: 100%; border: 1px solid #ccc;">
-                    <img id="photo-preview3" src="" alt="Prévia da Foto 3" style="display:none; max-width: 100%; border: 1px solid #ccc;">
-                </div>
+                <h2>Foto</h2>
+                <input type="file" id="photo" accept="image/*">
+                <img id="photo-preview" src="" alt="Prévia da Foto" style="display:none; margin-top: 10px; max-width: 100%; border: 1px solid #ccc;">
             </section>
         </main>
         <footer>
