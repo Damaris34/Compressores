@@ -70,7 +70,7 @@ table td {
 }
 
 input[type="text"], select {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 5px;
     margin: 2px 0;
     border: 1px solid #ccc;
