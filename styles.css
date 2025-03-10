@@ -16,7 +16,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 1200px;
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,16 +53,23 @@ main {
     text-align: left;
 }
 
-.section h2, .subsection h3 {
+.section.horizontal {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.subsection {
+    flex: 1;
+    margin-top: 20px;
+}
+
+.subsection h2, .subsection h3 {
     border-bottom: 3px solid #007BFF;
     padding-bottom: 5px;
     margin-bottom: 15px;
     font-size: 26px;
     color: #007BFF;
-}
-
-.subsection {
-    margin-top: 20px;
 }
 
 table {
