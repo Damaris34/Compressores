@@ -20,7 +20,7 @@
                 <h2>Compressores</h2>
                 <div class="subsection">
                     <h3>Atlas e Schuz</h3>
-                    <table id="atlas-schuz-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="subsection">
                     <h3>Interface</h3>
-                    <table id="interface-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -81,7 +81,7 @@
             </section>
             <section class="section">
                 <h2>Secadores</h2>
-                <table id="dryers-table">
+                <table>
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -108,7 +108,7 @@
             </section>
             <section class="section">
                 <h2>Pulmões</h2>
-                <table id="lungs-table">
+                <table>
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -157,4 +157,16 @@
                     <input type="file" id="photo3" accept="image/*">
                 </div>
                 <div id="photo-previews">
-                    <img id="photo-preview1" src="" alt="Prévia da Foto 1" style="display:none; margin-top: 10px; max-wi
+                    <img id="photo-preview1" src="" alt="Prévia da Foto 1" style="display:none; max-width: 100%; border: 1px solid #ccc;">
+                    <img id="photo-preview2" src="" alt="Prévia da Foto 2" style="display:none; max-width: 100%; border: 1px solid #ccc;">
+                    <img id="photo-preview3" src="" alt="Prévia da Foto 3" style="display:none; max-width: 100%; border: 1px solid #ccc;">
+                </div>
+            </section>
+        </main>
+        <footer>
+            <button onclick="generatePDF()">Gerar Relatório em PDF</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
