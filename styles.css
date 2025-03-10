@@ -49,7 +49,7 @@ main {
 
 .section {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
     text-align: left;
 }
 
@@ -97,6 +97,24 @@ input[type="text"], input[type="file"], select {
     font-size: 16px;
     background-color: #f9f9f9;
     box-sizing: border-box;
+}
+
+#photo-uploads {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#photo-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+#photo-previews img {
+    max-width: 30%;
+    border: 1px solid #ccc;
 }
 
 footer {
