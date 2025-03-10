@@ -79,13 +79,14 @@ th {
 }
 
 input[type="text"], input[type="file"], select {
-    width: calc(100% - 22px);
-    padding: 10px;
+    width: calc(100% - 22px); /* Ajusta para ocupar quase toda a largura da célula */
+    padding: 15px; /* Aumenta o padding para mais espaço */
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     background-color: #f9f9f9;
+    box-sizing: border-box; /* Garantir que o padding seja incluído na largura total */
 }
 
 footer {
