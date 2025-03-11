@@ -1,15 +1,22 @@
-// Função para exibir a prévia da foto
-document.getElementById('photo').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('photo-preview').src = e.target.result;
-            document.getElementById('photo-preview').style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
-});
+// Função para exibir a prévia das fotos
+function setupPhotoPreview(inputId, previewId) {
+    document.getElementById(inputId).addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(previewId).src = e.target.result;
+                document.getElementById(previewId).style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+// Configurar prévias para múltiplas fotos
+setupPhotoPreview('photo1', 'photo-preview1');
+setupPhotoPreview('photo2', 'photo-preview2');
+setupPhotoPreview('photo3', 'photo-preview3');
 
 // Função para gerar o PDF
 function generatePDF() {
