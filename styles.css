@@ -78,10 +78,23 @@ input[type="text"], select {
     font-size: 14px;
 }
 
-#photo-preview {
-    display: block;
+#photo-uploads {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 10px;
-    max-width: 100%;
+}
+
+#photo-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#photo-previews img {
+    max-width: 45%;
     border: 1px solid #ccc;
 }
 
