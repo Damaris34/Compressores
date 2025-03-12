@@ -1,34 +1,120 @@
-// Função para exibir a prévia das fotos
-function setupPhotoPreview(inputId, previewId) {
-    document.getElementById(inputId).addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById(previewId).src = e.target.result;
-                document.getElementById(previewId).style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-// Configurar prévias para múltiplas fotos
-setupPhotoPreview('photo1', 'photo-preview1');
-setupPhotoPreview('photo2', 'photo-preview2');
-setupPhotoPreview('photo3', 'photo-preview3');
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
 
-// Função para gerar o PDF
-function generatePDF() {
-    const element = document.getElementById('report-content');
-    const opt = {
-        margin:       0,
-        filename:     'relatorio_operacao.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    // New html2pdf() call with options
-    html2pdf().set(opt).from(element).save();
+header h1 {
+    font-size: 28px;
+    color: #007BFF;
+}
+
+.info p {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-top: 30px;
+}
+
+.subsection {
+    margin-top: 20px;
+}
+
+.section h2, .subsection h3 {
+    color: #007BFF;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+table th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+input[type="text"], select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#photo-uploads {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#photo-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#photo-previews img {
+    max-width: 45%;
+    border: 1px solid #ccc;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005bb5;
 }
