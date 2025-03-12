@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,11 +11,11 @@ body {
 
 .container {
     background-color: #ffffff;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
+    width: 85%;
+    max-width: 900px;
     box-sizing: border-box;
 }
 
@@ -25,15 +25,15 @@ header {
 }
 
 header h1 {
-    font-size: 28px;
+    font-size: 32px;
     color: #007BFF;
 }
 
 .info p {
-    font-size: 16px;
+    font-size: 18px;
     color: #555;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .section {
@@ -46,8 +46,8 @@ header h1 {
 
 .section h2, .subsection h3 {
     color: #007BFF;
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 15px;
     border-bottom: 2px solid #007BFF;
     display: inline-block;
 }
@@ -61,13 +61,13 @@ table {
 
 table th {
     background-color: #f2f2f2;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
     border: 1px solid #ddd;
 }
 
 table td {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ddd;
 }
 
