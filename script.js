@@ -17,6 +17,8 @@ function setupPhotoPreview(inputId, previewId) {
 setupPhotoPreview('photo1', 'photo-preview1');
 setupPhotoPreview('photo2', 'photo-preview2');
 setupPhotoPreview('photo3', 'photo-preview3');
+setupPhotoPreview('photo4', 'photo-preview4');
+setupPhotoPreview('photo5', 'photo-preview5');
 
 // Função para gerar o PDF
 function generatePDF() {
