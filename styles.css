@@ -83,8 +83,8 @@ input[type="text"], select {
 
 .photo-container {
     position: relative;
-    width: 120px; /* Aumente o tamanho para melhor visualização */
-    height: 120px; /* Aumente o tamanho para melhor visualização */
+    width: 120px; /* Ajuste o tamanho para melhor visualização */
+    height: 120px; /* Ajuste o tamanho para melhor visualização */
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     display: flex;
