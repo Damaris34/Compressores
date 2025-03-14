@@ -56,7 +56,7 @@ table {
 table th, table td {
     padding: 5px;
     text-align: left;
-    border: none; /* Remove bordas das células da tabela */
+    border: 1px solid #ddd;
 }
 
 table th {
@@ -83,8 +83,8 @@ input[type="text"], select {
 
 .photo-container {
     position: relative;
-    width: 100px; /* Ajuste o tamanho para melhor identificação */
-    height: 100px; /* Ajuste o tamanho para melhor identificação */
+    width: 120px; /* Aumente o tamanho para melhor visualização */
+    height: 120px; /* Aumente o tamanho para melhor visualização */
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     display: flex;
@@ -106,7 +106,7 @@ input[type="text"], select {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none;
+    display: block; /* Certifique-se de que a imagem seja exibida */
 }
 
 footer {
