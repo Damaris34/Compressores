@@ -32,4 +32,3 @@ function generatePDF() {
     // New html2pdf() call with options
     html2pdf().set(opt).from(element).save();
 }
-
