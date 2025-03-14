@@ -4,7 +4,6 @@ function loadImage(input, containerId) {
         const reader = new FileReader();
         reader.onload = function(e) {
             document.getElementById(containerId + '-img').src = e.target.result;
-            document.getElementById(containerId + '-img').style.display = 'block';
         };
         reader.readAsDataURL(file);
     }
@@ -15,8 +14,8 @@ function generatePDF() {
     const opt = {
         margin: 0.5,
         filename: 'relatorio_operacao.pdf',
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 3, useCORS: true }, // Aumenta a escala para melhor qualidade
+        image: { type: 'jpeg', quality: 0.95 }, // Aumente a qualidade da imagem
+        html2canvas: { scale: 3, useCORS: true }, // Aumente a escala para melhor qualidade
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
