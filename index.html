@@ -1,130 +1,190 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Operação</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script>
+        // Atualiza a data e hora automaticamente
+        function updateDateTime() {
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+            document.getElementById('datetime').textContent = formattedDate;
+        }
 
-.container {
-    width: 95%;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-header h1 {
-    font-size: 20px;
-    color: #007BFF;
-    border-bottom: 2px solid #007BFF;
-    display: inline-block;
-    padding-bottom: 3px;
-}
-
-.info {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #555;
-}
-
-.section {
-    margin-top: 10px;
-}
-
-.section h2 {
-    color: #007BFF;
-    font-size: 18px;
-    border-bottom: 2px solid #007BFF;
-    display: inline-block;
-    padding-bottom: 3px;
-    margin-bottom: 5px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 5px;
-    font-size: 12px;
-}
-
-table th, table td {
-    padding: 5px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-table th {
-    background-color: #f2f2f2;
-}
-
-input[type="text"], select {
-    width: calc(100% - 12px);
-    padding: 4px;
-    margin: 2px 0;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    font-size: 12px;
-    box-sizing: border-box;
-}
-
-.photo-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 15px;
-}
-
-.photo-container {
-    position: relative;
-    width: 120px; /* Aumente o tamanho para melhor visualização */
-    height: 120px; /* Aumente o tamanho para melhor visualização */
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #888;
-    overflow: hidden;
-}
-
-.photo-container input[type="file"] {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.photo-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block; /* Certifique-se de que a imagem seja exibida */
-}
-
-footer {
-    text-align: center;
-    margin-top: 15px;
-}
-
-button {
-    padding: 8px 16px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #005bb5;
-}
+        // Atualiza a data e hora quando a página é carregada
+        window.onload = function() {
+            updateDateTime();
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="report-content">
+        <header>
+            <h1>Relatório de Operação</h1>
+            <div class="info">
+                <p>Data/Horário: <span id="datetime"></span></p>
+            </div>
+        </header>
+        <main>
+            <section class="section">
+                <h2>Compressores</h2>
+                <h3>Atlas e Schuz</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Pressão</th>
+                            <th>Temperatura</th>
+                            <th>Em Funcionamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atlas 1</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Atlas 2</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Schuz 1</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Schuz 2</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Interface 1</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="section">
+                <h2>Secadores</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Pressão</th>
+                            <th>Temperatura</th>
+                            <th>Em Funcionamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SMC 1</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Schuz 1</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="section">
+                <h2>Pulmões</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Pressão</th>
+                            <th>Temperatura</th>
+                            <th>Em Funcionamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pulmão 1</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Pulmão 2</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Pulmão 3</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                        <tr>
+                            <td>Pulmão 4</td>
+                            <td><input type="text" placeholder="Pressão"></td>
+                            <td><input type="text" placeholder="Temperatura"></td>
+                            <td><select><option>Operando</option><option>Parado</option></select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="section">
+                <h2>Responsável</h2>
+                <input type="text" id="responsible" placeholder="Nome do Responsável">
+            </section>
+            <section class="section photo-section">
+                <h2>Fotos</h2>
+                <div class="photo-container" id="photo1">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo1')">
+                    <img id="photo1-img" src="" alt="Foto 1">
+                </div>
+                <div class="photo-container" id="photo2">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo2')">
+                    <img id="photo2-img" src="" alt="Foto 2">
+                </div>
+                <div class="photo-container" id="photo3">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo3')">
+                    <img id="photo3-img" src="" alt="Foto 3">
+                </div>
+                <div class="photo-container" id="photo4">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo4')">
+                    <img id="photo4-img" src="" alt="Foto 4">
+                </div>
+                <div class="photo-container" id="photo5">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo5')">
+                    <img id="photo5-img" src="" alt="Foto 5">
+                </div>
+                <div class="photo-container" id="photo6">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo6')">
+                    <img id="photo6-img" src="" alt="Foto 6">
+                </div>
+                <div class="photo-container" id="photo7">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo7')">
+                    <img id="photo7-img" src="" alt="Foto 7">
+                </div>
+                <div class="photo-container" id="photo8">
+                    <input type="file" accept="image/*" onchange="loadImage(this, 'photo8')">
+                    <img id="photo8-img" src="" alt="Foto 8">
+                </div>
+            </section>
+        </main>
+        <footer>
+            <button onclick="generatePDF()">Gerar Relatório em PDF</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
