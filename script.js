@@ -12,10 +12,10 @@ function loadImage(input, containerId) {
 function generatePDF() {
     const element = document.getElementById('report-content');
     const opt = {
-        margin: 0.5,
+        margin: 0.2,
         filename: 'relatorio_operacao.pdf',
         image: { type: 'jpeg', quality: 0.95 }, // Aumente a qualidade da imagem
-        html2canvas: { scale: 3, useCORS: true }, // Aumente a escala para melhor qualidade
+        html2canvas: { scale: 2, useCORS: true }, // Aumente a escala para melhor qualidade
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
