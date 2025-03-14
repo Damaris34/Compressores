@@ -15,11 +15,11 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 header h1 {
-    font-size: 20px;
+    font-size: 18px;
     color: #007BFF;
     border-bottom: 2px solid #007BFF;
     display: inline-block;
@@ -28,33 +28,33 @@ header h1 {
 
 .info {
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 14px;
+    margin-bottom: 5px;
+    font-size: 12px;
     color: #555;
 }
 
 .section {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .section h2 {
     color: #007BFF;
-    font-size: 18px;
+    font-size: 16px;
     border-bottom: 2px solid #007BFF;
     display: inline-block;
     padding-bottom: 3px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 5px;
+    margin-top: 3px;
     font-size: 12px;
 }
 
 table th, table td {
-    padding: 5px;
+    padding: 3px;
     text-align: left;
     border: 1px solid #ddd;
 }
@@ -65,8 +65,8 @@ table th {
 
 input[type="text"], select {
     width: calc(100% - 12px);
-    padding: 4px;
-    margin: 2px 0;
+    padding: 3px;
+    margin: 1px 0;
     border: 1px solid #ddd;
     border-radius: 3px;
     font-size: 12px;
@@ -76,15 +76,15 @@ input[type="text"], select {
 .photo-section {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .photo-container {
     position: relative;
-    width: 120px; /* Ajuste o tamanho para melhor visualização */
-    height: 120px; /* Ajuste o tamanho para melhor visualização */
+    width: 100px; /* Ajuste o tamanho para melhor visualização */
+    height: 100px; /* Ajuste o tamanho para melhor visualização */
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     display: flex;
@@ -111,11 +111,11 @@ input[type="text"], select {
 
 footer {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 button {
-    padding: 8px 16px;
+    padding: 6px 12px;
     background-color: #007BFF;
     color: #fff;
     border: none;
