@@ -16,7 +16,7 @@ function generatePDF() {
         margin: 0.5,
         filename: 'relatorio_operacao.pdf',
         image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: { scale: 3, useCORS: true }, // Aumenta a escala para melhor qualidade
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
